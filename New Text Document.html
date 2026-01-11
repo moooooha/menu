@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Clubroom Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #e8dcc4; /* لون الخلفية البيج المطلوب */
+            --text-color: #1b3b30; /* أخضر داكن فاخر مستوحى من اللوجو */
+            --accent-color: #8c7b5b; /* لون ذهبي/برونزي خفيف للأسعار */
+            --font-header: 'Playfair Display', serif;
+            --font-body: 'Lato', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .menu-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border: 2px solid var(--text-color); /* إطار خارجي رفيع */
+            padding: 40px;
+            position: relative;
+        }
+
+        /* تنسيق اللوجو */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(27, 59, 48, 0.2);
+        }
+
+        .logo-img {
+            max-width: 300px;
+            height: auto;
+            /* هذه الخاصية تجعل الخلفية البيضاء للوجو شفافة لتندمج مع البيج */
+            mix-blend-mode: multiply; 
+            filter: contrast(1.1);
+        }
+
+        .sub-header {
+            text-align: center;
+            font-family: var(--font-header);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        /* تنسيق العناوين والأقسام */
+        h2.section-title {
+            font-family: var(--font-header);
+            text-align: center;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            position: relative;
+            color: var(--text-color);
+        }
+
+        h2.section-title::after {
+            content: "♦";
+            display: block;
+            font-size: 1rem;
+            color: var(--accent-color);
+            margin-top: 10px;
+        }
+
+        /* تنسيق عناصر المنيو */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr 1fr; /* عمودين للشاشات الكبيرة */
+                column-gap: 60px;
+            }
+            .full-width {
+                grid-column: span 2;
+            }
+        }
+
+        .menu-item {
+            margin-bottom: 20px;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px dotted rgba(27, 59, 48, 0.4);
+            margin-bottom: 5px;
+        }
+
+        .item-name {
+            font-family: var(--font-header);
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: var(--text-color);
+            white-space: nowrap;
+            padding-left: 10px;
+        }
+
+        .item-desc {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #4a5c55; /* لون أفتح قليلاً للوصف */
+        }
+
+        /* تنسيق الإضافات */
+        .addons-list {
+            text-align: center;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .addons-list li {
+            font-family: var(--font-header);
+            font-size: 1rem;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-top: 1px solid rgba(27, 59, 48, 0.2);
+            padding-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="menu-container">
+        
+        <div class="logo-container">
+            <img src="image.png" alt="The Clubroom Logo" class="logo-img">
+            <div class="sub-header">
+                Specialty Coffee • Signature Matcha • Refined Brunch • Artisanal Bakery<br>
+                <span style="font-size: 0.8em; opacity: 0.8;">Milk: Full Cream, Almond, Oat, Coconut, Lactose-Free | Sweeteners: Honey or Maple</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">Hot Coffee</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Espresso</span>
+                    <span class="item-price">70 EGP</span>
+                </div>
+                <p class="item-desc">A pure, expressive shot with velvety crema.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Americano</span>
+                    <span class="item-price">85 EGP</span>
+                </div>
+                <p class="item-desc">Espresso gently lengthened with hot water.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Cortado</span>
+                    <span class="item-price">90 EGP</span>
+                </div>
+                <p class="item-desc">Silken milk and espresso in balance.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Flat White</span>
+                    <span class="item-price">100 EGP</span>
+                </div>
+                <p class="item-desc">Microfoam milk over a double shot.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Cappuccino</span>
+                    <span class="item-price">115 EGP</span>
+                </div>
+                <p class="item-desc">Harmony of foam, milk and espresso.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Latte</span>
+                    <span class="item-price">115 EGP</span>
+                </div>
+                <p class="item-desc">Smooth and comforting.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Spanish Latte</span>
+                    <span class="item-price">130 EGP</span>
+                </div>
+                <p class="item-desc">Sweetened with condensed milk.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Salted Vanilla Latte</span>
+                    <span class="item-price">135 EGP</span>
+                </div>
+                <p class="item-desc">House vanilla with sea salt.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Matcha Latte</span>
+                    <span class="item-price">160 EGP</span>
+                </div>
+                <p class="item-desc">Ceremonial matcha with milk.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Hot Chocolate</span>
+                    <span class="item-price">165 EGP</span>
+                </div>
+                <p class="item-desc">Decadent Belgian cocoa.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Iced & Blended</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Iced Americano</span>
+                    <span class="item-price">90 EGP</span>
+                </div>
+                <p class="item-desc">Clean and refreshing.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Iced Latte</span>
+                    <span class="item-price">120 EGP</span>
+                </div>
+                <p class="item-desc">Chilled espresso and milk.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Iced Spanish Latte</span>
+                    <span class="item-price">140 EGP</span>
+                </div>
+                <p class="item-desc">Creamy and indulgent.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Coffee Blend</span>
+                    <span class="item-price">140 EGP</span>
+                </div>
+                <p class="item-desc">Ice-blended specialty coffee.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Salted Caramel Blend</span>
+                    <span class="item-price">140 EGP</span>
+                </div>
+                <p class="item-desc">Golden caramel finish.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Tiramisu Blend</span>
+                    <span class="item-price">130 EGP</span>
+                </div>
+                <p class="item-desc">Coffee, mascarpone and cocoa.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Signature Matcha</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Banana Bread Matcha</span>
+                    <span class="item-price">185 EGP</span>
+                </div>
+                <p class="item-desc">Banana and vanilla layered with matcha.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Cookie Butter Matcha</span>
+                    <span class="item-price">195 EGP</span>
+                </div>
+                <p class="item-desc">Spiced cookie butter with matcha.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Salted Vanilla Foam</span>
+                    <span class="item-price">190 EGP</span>
+                </div>
+                <p class="item-desc">Matcha with salted vanilla cold foam.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Coconut Cloud Matcha</span>
+                    <span class="item-price">190 EGP</span>
+                </div>
+                <p class="item-desc">Coconut water topped with creamy cloud matcha.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Smoothies & Superfoods</h2>
+        <div class="menu-grid">
+            <div class="menu-item full-width">
+                <div class="item-header">
+                    <span class="item-name">Zero Gravity</span>
+                    <span class="item-price">170 EGP</span>
+                </div>
+                <p class="item-desc">Matcha, activated charcoal, blue spirulina, banana, Medjool dates, cherries, vanilla, maca, collagen, maple syrup, oat milk, coconut cream.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Iced Chocolate Velvet</span>
+                    <span class="item-price">160 EGP</span>
+                </div>
+                <p class="item-desc">Iced blended chocolate mixed with banana cinnamon.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Blue Spirulina Smoothie</span>
+                    <span class="item-price">160 EGP</span>
+                </div>
+                <p class="item-desc">Antioxidant rich.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Pitaya Crush</span>
+                    <span class="item-price">160 EGP</span>
+                </div>
+                <p class="item-desc">Dragon fruit refresher.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Acai Power Bowl</span>
+                    <span class="item-price">215 EGP</span>
+                </div>
+                <p class="item-desc">Thick acai with fruit and granola.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Modern Benedicts</h2>
+        <div class="menu-grid">
+            <div class="menu-item full-width">
+                <div class="item-header">
+                    <span class="item-name">Smoky Harissa Benedict</span>
+                    <span class="item-price">190 EGP</span>
+                </div>
+                <p class="item-desc">Poached eggs with guacamole, baby arugula, beef bacon on club toast, roasted pepper hollandaise, chili flakes, pesto mayo & citrus salad.</p>
+            </div>
+            <div class="menu-item full-width">
+                <div class="item-header">
+                    <span class="item-name">Truffle Mushroom Benedict</span>
+                    <span class="item-price">220 EGP</span>
+                </div>
+                <p class="item-desc">Poached eggs with sautéed mushrooms parmesan, baby spinach, truffle cream, truffle oil, shitake mushroom, truffle mayo & citrus salad.</p>
+            </div>
+            <div class="menu-item full-width">
+                <div class="item-header">
+                    <span class="item-name">Salmon Dill Benedict</span>
+                    <span class="item-price">290 EGP</span>
+                </div>
+                <p class="item-desc">Poached eggs with lemon dill cream cheese, baby arugula, pickled red carrot, dill hollandaise, basil oil, beetroot mayo & citrus salad.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Savories & Shakshuka</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Egg Bomb Cromboloni</span>
+                    <span class="item-price">250 EGP</span>
+                </div>
+                <p class="item-desc">Filled with fried egg, zaatar labneh, roasted cherry tomato, beef bacon & basil oil.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Club Shakshuka</span>
+                    <span class="item-price">170 EGP</span>
+                </div>
+                <p class="item-desc">Baked eggs in spiced tomato-pepper sauce with cumin and paprika. Served with club toast.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Green Feta Shakshuka</span>
+                    <span class="item-price">180 EGP</span>
+                </div>
+                <p class="item-desc">Green sauce of spinach, tomato jam, feta cheese, finished with sumac.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Harissa Heat</span>
+                    <span class="item-price">170 EGP</span>
+                </div>
+                <p class="item-desc">Classic shakshuka with kick of harissa, basil, fried potato.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Stacked & Stuffed</h2>
+        <div class="menu-grid">
+            <div class="menu-item full-width">
+                <div class="item-header">
+                    <span class="item-name">Pesto Chicken Melt</span>
+                    <span class="item-price">180 EGP</span>
+                </div>
+                <p class="item-desc">Signature sourdough, grilled chicken, basil pesto mayo, avocado, tomato, Batavia lettuce & citrus salad.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Tuscan Roast Beef</span>
+                    <span class="item-price">170 EGP</span>
+                </div>
+                <p class="item-desc">Slow-roasted beef, caramelized onions, pickled aioli, Emmental cheese.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Nordic Salmon</span>
+                    <span class="item-price">290 EGP</span>
+                </div>
+                <p class="item-desc">Smoked salmon, dill-infused cream cheese, baby arugula, capers, red onions.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Truffle Mushroom Melt</span>
+                    <span class="item-price">230 EGP</span>
+                </div>
+                <p class="item-desc">Sourdough, mixed cheese, mushrooms, truffle.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Open Face & Pizza Bagel</h2>
+        <div class="menu-grid">
+            <div class="menu-item full-width">
+                <div class="item-header">
+                    <span class="item-name">Burrata & Avocado</span>
+                    <span class="item-price">370 EGP</span>
+                </div>
+                <p class="item-desc">Creamy burrata, fresh avocado, roasted peppers, olive oil drizzle.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Pizza Margherita</span>
+                    <span class="item-price">140 EGP</span>
+                </div>
+                <p class="item-desc">Tomato sauce, bocconcini, basil, parmesan, olive oil.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Pizza Pepperoni</span>
+                    <span class="item-price">175 EGP</span>
+                </div>
+                <p class="item-desc">Tomato sauce, bocconcini, pepperoni, parmesan.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Pizza Smoked Salmon</span>
+                    <span class="item-price">220 EGP</span>
+                </div>
+                <p class="item-desc">Creamy cheese, bocconcini, smoked salmon, green onion, herb oil.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Heavenly Pancakes & Crepes</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Orange Blossom Cloud</span>
+                    <span class="item-price">270 EGP</span>
+                </div>
+                <p class="item-desc">Whipped cream, berries puree, orange blossom water.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Rose Pistachio Stack</span>
+                    <span class="item-price">250 EGP</span>
+                </div>
+                <p class="item-desc">Crushed pistachios, pistachio sauce, rose-scented mascarpone.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Date Walnut Crepe</span>
+                    <span class="item-price">210 EGP</span>
+                </div>
+                <p class="item-desc">Date paste, toasted walnuts, honey mascarpone, cinnamon.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Choco Hazelnut Crepe</span>
+                    <span class="item-price">230 EGP</span>
+                </div>
+                <p class="item-desc">Hazelnut cream, crushed hazelnut, chocolate sauce.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Bowls of Goodness</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Banana Date Nut Oats</span>
+                    <span class="item-price">225 EGP</span>
+                </div>
+                <p class="item-desc">Overnight oats, dates, caramelized bananas, pecan, honey, cinnamon.</p>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Mango Coconut Chia</span>
+                    <span class="item-price">320 EGP</span>
+                </div>
+                <p class="item-desc">Tropical chia pudding with mango puree and cardamom hint.</p>
+            </div>
+            <div class="menu-item full-width">
+                <div class="item-header">
+                    <span class="item-name">Rainbow Quinoa Salad</span>
+                    <span class="item-price">300 EGP</span>
+                </div>
+                <p class="item-desc">Quinoa, cherry tomatoes, cucumber, avocado, sweet corn, pomegranate, lemon-mint dressing.</p>
+            </div>
+            <div class="menu-item full-width">
+                <div class="item-header">
+                    <span class="item-name">Spicy Salmon Salad</span>
+                    <span class="item-price">420 EGP</span>
+                </div>
+                <p class="item-desc">Baby arugula, jalapeño lemon vinaigrette, smoked salmon, roasted cherry tomatoes.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">French Bites & Sweets</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Butter Croissant</span>
+                    <span class="item-price">90 EGP</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Almond Croissant</span>
+                    <span class="item-price">110 EGP</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Pistachio Croissant</span>
+                    <span class="item-price">130 EGP</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Tiramisu Bites</span>
+                    <span class="item-price">175 EGP</span>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="item-header">
+                    <span class="item-name">Club Cookies</span>
+                    <span class="item-price">100 EGP</span>
+                </div>
+                <p class="item-desc">Date Tahini Chip OR Halva Choco Chunk</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Add Ons</h2>
+        <ul class="addons-list">
+            <li>Extra Shot 45</li> |
+            <li>Syrup 35</li> |
+            <li>Wipping Cream 35</li> |
+            <li>Alt Milk 45</li> |
+            <li>Cold Foam 70</li> |
+            <li>Mushroom 50</li> |
+            <li>Chicken 75</li> |
+            <li>Salmon 100</li>
+        </ul>
+
+        <div class="footer-note">
+            The Clubroom © 2026
+        </div>
+    </div>
+
+</body>
+</html>
