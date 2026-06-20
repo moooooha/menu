@@ -14,14 +14,8 @@
         }
         
         * { box-sizing: border-box; -webkit-print-color-adjust: exact; }
-        body { background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-body); margin: 0; padding: 0; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-body); margin: 0; padding: 0; overflow-x: hidden; }
         
-        /* --- Animations --- */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         /* --- Responsive Page Layout (Mobile First) --- */
         .page { 
             width: 100%; 
@@ -32,9 +26,20 @@
             position: relative; 
             display: flex; 
             flex-direction: column; 
-            animation: fadeUp 0.8s ease-out forwards;
         }
         
+        /* --- Scroll Animation Classes --- */
+        header, .section {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        
+        header.visible, .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         header { text-align: center; margin-bottom: 30px; }
         
         .logo-text { 
@@ -51,23 +56,9 @@
             transition: opacity 0.3s ease;
         }
 
-        /* Default to 1 column for Mobile */
         .container { column-count: 1; column-gap: 30px; flex-grow: 1; }
         
-        .section { 
-            break-inside: avoid; margin-bottom: 25px; 
-            opacity: 0;
-            animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-        
-        .section:nth-child(1) { animation-delay: 0.1s; }
-        .section:nth-child(2) { animation-delay: 0.2s; }
-        .section:nth-child(3) { animation-delay: 0.3s; }
-        .section:nth-child(4) { animation-delay: 0.4s; }
-        .section:nth-child(5) { animation-delay: 0.5s; }
-        .section:nth-child(6) { animation-delay: 0.6s; }
-        .section:nth-child(7) { animation-delay: 0.7s; }
-        .section:nth-child(8) { animation-delay: 0.8s; }
+        .section { break-inside: avoid; margin-bottom: 25px; }
 
         h2 { 
             font-family: var(--font-header); font-size: 17px; text-transform: uppercase; 
@@ -78,11 +69,23 @@
 
         .item { 
             margin-bottom: 15px; 
-            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            padding: 2px 0;
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), background-color 0.3s;
+            padding: 5px 4px;
+            border-radius: 6px;
         }
 
-        /* Slightly larger fonts for mobile readability */
+        /* --- Touch Effect for Mobile Users --- */
+        @media (hover: none) {
+            .item:active {
+                transform: scale(0.96); /* ينكمش للداخل كأنه زرار */
+                background-color: rgba(27, 59, 48, 0.05); /* تظليل خفيف جداً */
+                transition: transform 0.1s, background-color 0.1s;
+            }
+            .item:active .item-dots {
+                border-bottom: 1px dotted rgba(27, 59, 48, 0.9);
+            }
+        }
+
         .item-header { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; font-size: 14px; } 
         
         .item-dots { 
@@ -107,21 +110,17 @@
         }
         
         .origin-list { font-size: 11px; list-style: none; padding-left: 10px; margin-top: 5px; }
-        .origin-list li {
-            transition: transform 0.2s ease, opacity 0.2s ease;
-            opacity: 0.85;
-            padding: 3px 0;
-        }
+        .origin-list li { padding: 3px 0; opacity: 0.85; }
 
         /* --- Hover Effects ONLY for devices with a mouse (Desktop) --- */
-        /* يمنع تعليق الـ hover على شاشات الموبايل */
         @media (hover: hover) {
             .logo-text:hover { letter-spacing: 6px; }
             header:hover .tagline { opacity: 0.8; }
             .section:hover h2 { border-bottom: 1px solid rgba(27, 59, 48, 0.8); }
-            .item:hover { transform: translateX(6px); }
+            .item:hover { transform: translateX(6px); background-color: transparent; }
             .item:hover .item-dots { border-bottom: 1px dotted rgba(27, 59, 48, 0.9); }
             .item:hover .item-desc { opacity: 1; }
+            .origin-list li { transition: transform 0.2s ease, opacity 0.2s ease; }
             .origin-list li:hover { transform: translateX(4px); opacity: 1; }
         }
 
@@ -136,9 +135,8 @@
             }
             .container { column-count: 2; }
             
-            /* Revert fonts to original sizes for Desktop layout */
             h2 { font-size: 16px; margin-bottom: 10px; }
-            .item { margin-bottom: 10px; }
+            .item { margin-bottom: 10px; padding: 2px 0; }
             .item-header { font-size: 11.5px; } 
             .item-price { font-size: 11.5px; }
             .item-desc { font-size: 9.5px; margin-top: 2px;}
@@ -146,7 +144,7 @@
             .origin-list { font-size: 9px; }
         }
 
-        /* --- Print Styles (A4 Exactly) --- */
+        /* --- Print Styles --- */
         @media print {
             @page { size: A4; margin: 0; }
             body { background-color: white; padding: 0; }
@@ -158,10 +156,10 @@
                 page-break-after: always;
                 box-shadow: none;
                 border-radius: 0;
-                animation: none; /* Disable animations for printing */
             }
             .container { column-count: 2; }
-            .section { opacity: 1; animation: none; margin-bottom: 20px; }
+            /* إيقاف الأنيميشن عند الطباعة */
+            header, .section { opacity: 1 !important; transform: none !important; margin-bottom: 20px; transition: none !important; }
         }
     </style>
 </head>
@@ -340,6 +338,29 @@
     </div>
     <div class="footer-info">Prices exclusive of VAT & Service Charge • The Club Room 2026</div>
 </div>
+
+<!-- سكريبت التشغيل لحركة الشاشة (Intersection Observer) -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -40px 0px', // بيشتغل لما القسم يظهر منه شوية من تحت
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // الأنميشن يشتغل مرة واحدة بس
+                }
+            });
+        }, observerOptions);
+
+        const animatedElements = document.querySelectorAll('header, .section');
+        animatedElements.forEach(el => observer.observe(el));
+    });
+</script>
 
 </body>
 </html>
